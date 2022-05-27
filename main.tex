@@ -1,0 +1,92 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{subfiles} % Best loaded last in the preamble
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+\usepackage{cite}
+\usepackage{graphicx}	%scalebox
+\usepackage{caption,setspace}
+\usepackage{multirow}
+\usepackage{adjustbox} %表格置中
+\usepackage{cases}  %聯立方程式
+\usepackage{braket}  %量子狀態
+\usepackage{threeparttable}
+\usepackage{color}
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{dcolumn,booktabs,tabularx}
+\usepackage{subfigure}
+\usepackage{indentfirst}
+
+% \usepackage{natbib}
+% \usepackage{biblatex}
+% \addbibresource{<ref>.bib}
+
+
+\usepackage{environ}
+\NewEnviron{myequation}{%
+\begin{equation}
+\scalebox{1.5}{$\BODY$}
+\end{equation}
+}
+
+\setlength{\paperwidth}{215.9mm}
+\setlength{\hoffset}{-9.7mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\textwidth}{184.3mm}
+\setlength{\columnsep}{6.3mm}
+\setlength{\marginparsep}{0mm}
+\setlength{\marginparwidth}{0mm}
+
+\setlength{\paperheight}{279.4mm}
+\setlength{\voffset}{-7.4mm}
+\setlength{\topmargin}{0mm}
+\setlength{\headheight}{0mm}
+\setlength{\headsep}{0mm}
+\setlength{\topskip}{0mm}
+\setlength{\textheight}{235.2mm}
+\setlength{\footskip}{12.4mm}
+
+\setlength{\parindent}{1pc}
+
+
+% \renewcommand\thesection{\Roman{section}}
+% \renewcommand\thesection{\roman{subsection}}
+
+\title{Thesis}
+\author{Neo}
+\date{date}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+    abstract
+\end{abstract}
+
+\section{Intorduction}
+\subfile{sections/Introduction}
+
+\section{Related Work}
+\subfile{sections/Related Work}
+
+\section{Background}
+\subfile{sections/Background}
+
+\section{Proposed Method}
+\subfile{sections/Proposed Method}
+
+\section{Experiment}
+\subfile{sections/Experiment}
+
+\subsection{Conclution}
+\subfile{sections/Conclution}
+
+\subsection{Reference}
+\subfile{sections/Reference}
+% \bibliographystyle{plainnat}
+% \bibliography{ref.bib}
+\end{document}
