@@ -55,23 +55,79 @@
 
 Technical indicators are the rule of thumb or pattern-based signals produced mathematically by the stock price or volume. The fundatioin of technical indicators is the historical prices of the stocks. It is belived that the history will repeated itself as the time extends. In other words, patterns of the market behavior continously appears throughout the history of the stock market. By analyzing the historical data, technical analysis use indicators to determine the timing to buy or sell stocks.
 
-\subsubsection{Simple Moving Average (SMA)}
+\subsubsection{Moving Average (MA)}
 
-% \textbf{What is Simple Moving Average}
-A Moving Average is an indicator that shows the trend of stock price of a company. If the moving average was decreasing, it indecates that the price is falling recently. If the moving average was increasing, it indecates that the price is rising recently. There are several different types of moving averages. The most polpular one is the simple moving average (SMA). The major difference between moving averages is the weight applies to the stock price when calculating the indecator.
+% \textbf{What is Moving Average}
+A Moving Average is an indicator that shows the trend of stock price of a company. If the moving average was decreasing, it indicates that the price is falling recently. If the moving average was increasing, it indicates that the price is rising recently. There are several different types of moving averages. The most popular one is the Simple Moving Average (SMA), which is the indicator that is used in this research. The main difference between the moving averages is that the weighting applies to the price of stocks when calculating the indicator.
+\bigbreak
+
+% \textbf{How to use MA}
+The most common way to use MA is to compare the relationship between two MA trends, known as crossover. The way to define a crossover is that when plotting two different MA values, the first MA line crosses through the second MA line from the bottom. This is also referred to as a golden cross. On the other hand, a death cross is that when the first MA line crosses through the second MA line of from above. We can simplify the trading strategy of using these two MA into MA($MA_{1},\ MA_{2}$). Table \ref{trad_MA} shows the parameters of traditional MA that are frequently been use by investers. The combination of the traditional strategy is restricted. Only two types of strategies are allowed, MA(Short-term, Mid-term), MA(Mid-term, Long-term). Hence there are 8 strategies in traditional MA.
+\bigbreak
+
+\begin{table}
+    \centering
+    \captionsetup{font={footnotesize}}
+    \caption{Tradition MA strategies}
+    \label{trad_MA}
+    \footnotesize
+    \begin{tabular*}{0.8\textwidth}{c @{\extracolsep{\fill}} cc}
+        \toprule
+        \textbf{Short-term}  & \textbf{Mid-term}      & \textbf{Long-term}   \\
+        \midrule
+        5 days (one week)   & 20 days (one month)    & 120 days (half year) \\
+        10 days (two weeks) & 60 days (three months) & 240 days (one year)  \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+% \begin{table}
+%     \centering
+%     \captionsetup{font={footnotesize}}
+%     \caption{Tradition MA strategies}
+%     \label{trad_MA}
+%     \footnotesize
+%     \resizebox{0.5\textwidth}{!}{%
+%         \begin{tabular}{ccc}
+%             \toprule
+%             \textbf{Short-term}  & \textbf{Mid-term}      & \textbf{Long-term}   \\
+%             \midrule
+%             5 days (one week)   & 20 days (one month)    & 120 days (half year) \\
+%             10 days (two weeks) & 60 days (three months) & 240 days (one year)  \\
+%             \bottomrule
+%         \end{tabular}%
+%     }
+% \end{table}
+
+% \begin{table}
+%     \centering
+%     \captionsetup{font={footnotesize}}
+%     \caption{Tradition MA strategies}
+%     \label{trad_MA}
+%     \footnotesize
+%     \begin{tabularx}\linewidth{ccc}
+%         \toprule
+%         \textbf{Short-term}  & \textbf{Mid-term}      & \textbf{Long-term}   \\
+%         \midrule
+%         5 days (one week)   & 20 days (one month)    & 120 days (half year) \\
+%         10 days (two weeks) & 60 days (three months) & 240 days (one year)  \\
+%         \bottomrule
+%     \end{tabularx}%
+% \end{table}
 \bigbreak
 
 % \textbf{SMA formula}
-SMA is a indicator which can be easily calculated compare to the other moving averages because the weight that applies to stocks price when calculate SMA is equally weighted. SMA is the average closed price of a certain period of time (e.g., 5 days). The period of days that is been used to calculate the averge price is called look-back period. The formula of SMA is shown in \ref{SMA}, where $n$ is the look-back period and $t$ is the date of today.
+Amoung all the MA, SMA is a indicator which can be easily calculated, since the weight which applies to the price of stocks when calculating SMA is equally weighted. SMA is the average closed price of a certain period of time (e.g., 5 days). The period of days that is been used to calculate the averge price is called look-back period. The formula of SMA is shown in \ref{SMA}, where $N$ is the look-back period and $T$ is the date of today.
 
 \begin{equation}\label{SMA}\scalebox{1}
-    {$SMA_{n} = \dfrac{price_{t-n}+price_{t-n+1}+price_{t-n+2}+...+price_{t-2}+price_{t-1}}{n}$}
+    {$SMA_{N} = \dfrac{price_{T-N}+price_{T-N+1}+price_{T-N+2}+...+price_{T-2}+price_{T-1}}{N}$}
 \end{equation}
 \bigbreak
 
-% \textbf{How to use SMA}
-The most common method of using SMA is to compare the relationship between two trends of SMA, which is called crossover. The way to define a crossover is that when plotting two different SMA values, the line of the first SMA passes through the line of the second SMA from below. This is also called a golden crossover. On the other hand, a death crossover is that when the line of first SMA passes through the line of second SMA from above. We can simplify the trading strategy of using these two SMA into SMA($1_{st}$ SMA, $2_{nd}$ SMA). Figure \ref{cross_demo} demostrate the timimg of golden cross and death cross when using SMA(5, 20). These two types of crossover are the important signal of determining the timing of buying or selling the stocks. A buy signal is triggered when a golden cross appears. A selling signal is triggered when a death cross appears.
 \bigbreak
+Figure \ref{cross_demo} demostrate the timimg of golden cross and death cross when using SMA(5, 20). A buy signal is triggered when a golden cross appears. A selling signal is triggered when a death cross appears. These two types of crossover are the important signal to determine the timing of buying or selling the stocks.
+\bigbreak
+
 
 \begin{figure}
     \centering
@@ -83,20 +139,41 @@ The most common method of using SMA is to compare the relationship between two t
     \label{cross_demo}
 \end{figure}
 
-% \textbf{Characteristics of SMA}
-
+% \textbf{Characteristics of MA}inconsistentparameters
+Even though MA is a popular investment indicator, there are still some downsides. The first issue is that moving average is a lagging indicator. As we can see in figure \ref{cross_demo}, the golden cross and death cross are lagging behind the best time to buy or sell shares, leading to lower profits. The second issue is that there are too few traditional strategies. It is difficult to make a profit with just those few strategies. The third problem has to do with the lack of parameters. MA uses just two parameters to find the golden cross and the death cross. Using the same parameters to buy and sell does not appear to be sufficient.
 \bigbreak
+In order to break the boundaries of traditional MA strategy and find more accuate buying and selling point, this study extands the parameters of MA. There will be four parameters, two for buying and two for selling, rather than jus two for buying and selling. In addition, the parameters can be selected from 1 to 256, instead of choosing from short-term, mid-term and long-term.
+This significantly increases the number of strategies from 8 to $\text{256}^\text{4}$. More than 4.2 billion strategies that can be selecte when using MA as indicator. Comparison of Traditoinal strategy and new MA strategy are shown in table \ref{trad_and_GN}.
+\bigbreak
+
+\begin{table}
+    \centering
+    \captionsetup{font={footnotesize}}
+    \caption{Comparison of Traditoinal strategy and new MA strategy}
+    \label{trad_and_GN}
+    \footnotesize
+    \begin{tabular*}{0.8\textwidth}{c @{\extracolsep{\fill}} cc}
+        \toprule
+        \textbf{}&\textbf{Traditoinal strategy}  & \textbf{new MA strategy}\\
+        \midrule
+        strategy  & MA($MA_1,\ MA_2$) & MA($MA_{buy_{1}},\ MA_{buy_{2}},\ MA_{sell_{1}}, \ MA_{sell_{2}}$) \\
+        solution space& 8 & $\text{256}^\text{4}$  \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
 
 \subsubsection{Relative Strength Index (RSI)}
 \textbf{What is RSI}
 
+Relative Strength Index (RSI) is a momentum oscillator that was first introduced by J. Welles Wilder, Jr. [3] in 1978. This is a popular indicator in financial technical analysis for calculating the recent price changes. RSI regards a rising stock price as strength from buyers, a falling price as strength from sellers, and the closing price is the outcome of the relative strength of buyers and sellers.
+\bigbreak
 \textbf{How to use RSI}
 
 \textbf{Characteristics of RSI}
 
 \textbf{RSI formula}
 
-Relative Strength Index (RSI) was developed by J. Welles Wilder, Jr. [3] in 1978. This index is a widely used technical indicator of the financial market for measuring the magnitude of recent price changes. RSI regards a rising stock price as strength from buyers, a falling price as strength from sellers, and the closing price is the outcome of the relative strength of buyers and sellers. Here are the formulae for calculating RSI. The calculating process can be divided into two steps. For step one (as shown in formulae \ref{step_1}), the average gain and loss is the average of rice and drop respectively during the look-back period. As for step two, with the RSI in step one, we can recursively calculate the next RSI using formula 2, where $N$ is a parameter, representing a look-back period. The formulae for calculating RSI are as follows.
+Here are the formulae for calculating RSI. The calculating process can be divided into two steps. For step one (as shown in formulae \ref{step_1}), the average gain and loss is the average of rice and drop respectively during the look-back period. As for step two, with the RSI in step one, we can recursively calculate the next RSI using formula 2, where $N$ is a parameter, representing a look-back period. The formulas for calculating RSI are as follows.
 
 \begin{equation}\label{step_1}\scalebox{1}
     {$RSI_{step\ one}=100-\left[\dfrac{100}{1+\dfrac{Average\ gain}{Average\ loss}}\right]$}
