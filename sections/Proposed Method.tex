@@ -4,14 +4,12 @@
 \subsection{Global-best guided Quantum-inspired Tabu Search Algorithm with Quantum Not Gate (GNQTS)}
 
 % \textbf{What is GNQTS and its evolution}
-Global-best guided quantum-inspired tabu search algorithm with quantum not gate (GNQTS) is a metaheuristic algorithm inspired by the superposition state of a quantum. There are three main features about GNQTS. First, after each generation, the particles will get closer and closer to the best solution. Meanwhile, keep the particles away from the wrong solutions. Second, uses the global best as a guidance that enhances the ability of convergence. Third, quantum not gate, is the key to escape local optima. With these features, GNQTS is capable of finding good solutions effectively. Figure \ref{flow} shows the flowchart of GNQTS. Algorithm \ref{GN_pseudo} is the pseudo code of GNQTS.
-
-\bigbreak
+Global-best guided quantum-inspired tabu search algorithm with quantum not gate (GNQTS) is a metaheuristic algorithm inspired by the superposition state of a quantum. There are three main features about GNQTS. First, after each generation, the particles will get closer and closer to the best solution. Meanwhile, keep the particles away from the wrong solutions. Second, the ability of convergence is enhanced by using the global best as a guidance. Third, quantum not gate is the key to escape local optima. With these features, GNQTS is capable of finding good solutions effectively. Figure \ref{flow} shows the flowchart of GNQTS. Algorithm \ref{GN_pseudo} is the pseudo code of GNQTS.
 
 % \textbf{Flow chart of GNQTS}
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.5] {figure/flowChart.png}
+    \includegraphics[scale = 0.4] {figure/flowChart.png}
     \captionsetup{font={footnotesize}}
     % \vspace{-3em}
     \caption{The flowchart of GNQTS}
@@ -20,7 +18,7 @@ Global-best guided quantum-inspired tabu search algorithm with quantum not gate 
 \end{figure}
 
 % \textbf{Pseudo code of GNQTS}
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \begin{minipage}{.6\linewidth}
         \begin{algorithm}[H]
@@ -47,17 +45,75 @@ Global-best guided quantum-inspired tabu search algorithm with quantum not gate 
     \end{minipage}
 \end{figure}
 
-\bigbreak
 
 % \textbf{Explain each step of GNQTS}
 \subsubsection{Initialztion}
 
+In order to explore the potential of RSI and SMA, this article extends the boundary of parameters of these two indicators. We set the look-back period of RSI from 1 to 256, oversold and overbought from 0 to 100. To encode the those bits, we prepare 8 bits for the look-back period, 7 bits for the oversold and the overbought, so there are 22 bits in total. The same rule applies to SMA as well, set the look-back period of 4 parameters from 1 to 256, 8 bits for each of them, so there are 32 bits in total. After determining how many bits of RSI and SMA, we use RSI as an example the following steps.
+
+\bigbreak
+
+At the beginning of the algorithm, the probability of choosing each bit is stored in a array called beta matrix. Each bit in the beta matrix is set to 0.5, as in superposition state of quantum - that is, the probability of choosing 0 or 1 is 50\%. As shown in \ref{init}, where $0 \leq n \leq 21$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.5] {figure/init.png}
+    \captionsetup{font={footnotesize}}
+    \caption{Initilize beta matrix}
+    \label{init}
+\end{figure}
 
 \subsubsection{Measurement}
 
+After initializing the beta matrix, a random number $r$ is given to each bit to determine the bit should be 0 or 1, where $0 \leq r \leq 1$. Then we compare each bit with its $r$, if the probability of $bit_{n}$ in the beta matrix is greater than $r$, $bit_{n}$ is set to 1, else set to 0. The process of measurement is shown in \ref{measure}.
+
+\bigbreak
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.5] {figure/measure.png}
+    \captionsetup{font={footnotesize}}
+    \caption{The process of forming a trading strategy in measurement}
+    \label{measure}
+\end{figure}
+
+\bigbreak
+
+After each bit is measured, we can transform these bits into decimals to form a trading strategy as shown in figur \ref{form_strategy}. In the example, 8 bits for RSI look-back period, 7 bits for the oversold and overbought. The RSI look-back period starts from 1, so add 1 to it.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.5] {figure/form_strategy.png}
+    \captionsetup{font={footnotesize}}
+    \caption{An example of transform bits into trading strategy. RSI (14) (20, 80).
+        RSI Look back period starts from 1.}
+    \label{form_strategy}
+\end{figure}
+
 \subsubsection{Fitness}
 
+The fitness in this paper is the rate of return. When trading strategies are generated, this paper uses simulated transactions to calculate the rate of return of each particle. The higher the rate of return is, the better is the trading strategy.
+
 \subsubsection{Quantum Not Gate (QN Gate)}
+
+There are three important information we need ot keep track of, which are local best particle, local worst particle and global best particle.  After calculating the rate of return in every iteration, the particle with highest rate of return is the local best, the particle with the lowest rate of return is local worst. By sorting the rate of return, it is easy to distinguish which particle is the local best and which is the local worst. We record their rate of return and trading strategy of these two particles. Then we compare the rate of return of local best and global best. If the rate of return the local best is higher than the return rate of the global best, we copy the information of local best to global best, which are strategy and rate of return. Next, according to the information of these global best and local worst, we can now execute the step of quantum not gate. First check each bit of the trading strategy of the global best and local worst.  If the global best has $bit_n = 1$, local worst has $bit_n = 0$, and $beta_n$ is below 0.5, then $beta_n = 1- beta_n$. If the global best has $bit_n = 0$, local worst has $bit_n = 1$, and $beta_n$ is over 0.5, then $beta_n = 1- beta_n$. As shown in Figure \ref{GN_gate}. We apply this rule for all 22 bits. This step makes GNQTS algoritm with the ability of escaping the local optimal.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale = 0.5] {figure/GN_gate.png}
+    \captionsetup{font={footnotesize}}
+    \caption{The process of updating beta matrix with quantum not gate}
+    \label{GN_gate}
+\end{figure}
+
+\subsubsection{Mixing RSI and SMA}
+
+There are two technical indicators we use in this research. Both of RSI and SMA are trained separately, in other words, either all the strategies is RSI or SMA. RSI and SMA dose not show up at the same time. To generate more flexable strategies, we propsed a method of combining RSI and SMA together while training.
+
+\bigbreak
+
+It is simple to use only one indicator while training. The training result uses the same indicator to form strategies, such as ($\text{RSI}_\text{buy}$, $\text{RSI}_\text{sell}$) or ($\text{MA}_\text{buy}$, $\text{MA}_\text{sell}$). If mixing two indicators together, the strategies will look like ($\text{RSI}_\text{buy}$, $\text{MA}_\text{sell}$) or ($\text{MA}_\text{buy}$, $\text{RSI}_\text{sell}$).
+The proper way of implementing the beta matrix is to split the beta matrix into two part. The total bits of beta matrix will be RSI 22 bits + MA 16 bits = 38 bits. If the strategy we use is ($\text{RSI}_\text{buy}$, $\text{MA}_\text{sell}$), the first 22 bits in beta matrix belongs to RSI, the last 16 bits belongs to MA. If the strategy we use is ($\text{MA}_\text{buy}$, $\text{RSI}_\text{sell}$), the first 16 bits in beta matrix belongs to MA, the last 22 bits belongs to RSI.
 
 \subsection{Sliding Windows}
 \textbf{What are sliding windows}
@@ -89,13 +145,10 @@ SMA is the average closed price of a certain period of time (e.g., 5 days). The 
     {$SMA_{N} = \dfrac{price_{T-N}+price_{T-N+1}+price_{T-N+2}+...+price_{T-2}+price_{T-1}}{N}$}
 \end{equation}
 
-\bigbreak
-
 % \textbf{How to use MA}
 The most common way to use MA is to compare the relationship between two MA trends, known as crossover. The way to define a crossover is that when plotting two different MA values, the first MA line crosses through the second MA line from the bottom. This is also referred to as a golden cross. On the other hand, a death cross is that when the first MA line crosses through the second MA line of from above. We can simplify the trading strategy of using these two MA into MA($MA_{1},\ MA_{2}$). Table \ref{trad_MA} shows the parameters of traditional MA that are frequently been use by investers. The combination of the traditional strategy is restricted. Only two types of strategies are allowed, MA(Short-term, Mid-term), MA(Mid-term, Long-term). Hence there are 8 strategies in traditional MA.
-\bigbreak
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \captionsetup{font={footnotesize}}
     \caption{Tradition MA strategies}
@@ -110,7 +163,6 @@ The most common way to use MA is to compare the relationship between two MA tren
         \bottomrule
     \end{tabularx}
 \end{table}
-
 
 % \begin{table}[ht]
 %     \centering
@@ -162,11 +214,9 @@ The most common way to use MA is to compare the relationship between two MA tren
 %     \end{tabularx}%
 % \end{table}
 
-\bigbreak
 Figure \ref{cross_demo} demostrate the timimg of golden cross and death cross when using SMA(5, 20). A buy signal is triggered when a golden cross appears. A selling signal is triggered when a death cross appears. These two types of crossover are the important signal to determine the timing of buying or selling the stocks.
-\bigbreak
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[scale = 0.6] {figure/cross1.png}
     \captionsetup{font={footnotesize}}
@@ -178,12 +228,13 @@ Figure \ref{cross_demo} demostrate the timimg of golden cross and death cross wh
 
 % \textbf{Characteristics of MA}inconsistentparameters
 Even though MA is a popular investment indicator, there are still some downsides. The first issue is that moving average is a lagging indicator. As we can see in figure \ref{cross_demo}, the golden cross and death cross are lagging behind the best time to buy or sell shares, leading to lower profits. The second issue is that there are too few traditional strategies. It is difficult to make a profit with just those few strategies. The third problem has to do with the lack of parameters. MA uses just two parameters to find the golden cross and the death cross. Using the same parameters to buy and sell does not appear to be sufficient.
-\bigbreak
-In order to break the boundaries of traditional MA strategy and find more accuate buying and selling point, this study extends the parameters of MA. There will be four parameters, two for buying and two for selling, rather than jus two for buying and selling. In addition, the parameters can be selected from 1 to 256, instead of choosing from short-term, mid-term and long-term.
-This significantly increases the number of strategies from 8 to $\text{256}^\text{4}$. More than 4.2 billion strategies that can be select when using MA as indicator. Comparison of MA traditoinal strategy and new MA strategy are shown in table \ref{trad_and_GN_SMA}.
+
 \bigbreak
 
-\begin{table}[ht]
+In order to break the boundaries of traditional MA strategy and find more accuate buying and selling point, this study extends the parameters of MA. There will be four parameters, two for buying and two for selling, rather than jus two for buying and selling. In addition, the parameters can be selected from 1 to 256, instead of choosing from short-term, mid-term and long-term.
+This significantly increases the number of strategies from 8 to $\text{256}^\text{4}$. More than 4.2 billion strategies that can be select when using MA as indicator. Comparison of MA traditoinal strategy and new MA strategy are shown in table \ref{trad_and_GN_SMA}.
+
+\begin{table}[H]
     \centering
     \captionsetup{font={footnotesize}}
     \caption{Comparison of SMA traditoinal strategy and new MA strategy}
@@ -204,12 +255,12 @@ This significantly increases the number of strategies from 8 to $\text{256}^\tex
 
 % \textbf{What is RSI}
 Relative Strength Index (RSI) is a momentum oscillator that was first introduced by J. Welles Wilder, Jr. [3] in 1978. This is a popular indicator in financial technical analysis that measures the magnitude of recent prices changes. The basic idea of RSI is to measure how quickly traders are bidding the price of the stocks up or down. RSI sees the uprising stocks as a buyer's strength, and the downswing stocks as a sellers' strength, which are referrd as overbought and oversold.
+
 \bigbreak
 
 % \textbf{RSI formula}
 The period of days need to calculate RSI is referred as look-back period. The RSI calculation process can be split into two steps. For step one (as shown in formula \ref{step_1}), the average gain and loss is the average upward change and downward change of the stocks price during the look-back period. As for step two, with the result from step one, we can calculate the next RSI using formula \ref{step_2} recursively, where $N$ is look-back period. RSI oscillates between 0 and 100.
 % The RSI formulas are as follows.
-\bigbreak
 
 \begin{equation}
     \label{step_1}
@@ -218,8 +269,6 @@ The period of days need to calculate RSI is referred as look-back period. The RS
     % \vspace{1em}
 \end{equation}
 
-\bigbreak
-
 \begin{equation}
     \label{step_2}
     \scalebox{1}
@@ -227,14 +276,10 @@ The period of days need to calculate RSI is referred as look-back period. The RS
     % \vspace{1em}
 \end{equation}
 
-\bigbreak
-
 % \textbf{How to use RSI}
-When using RSI, there are three parameters: look-back period, overbought, and oversold. First, select the period of days to calculate RSI. Second, choose the thresholds for oversold and overbought, which means that when RSI meets these thresholds, it will trigger the buy or sell signal. The representation of a RSI strategy is RSI($period$)($oversold,\ overbought$). Traditionally, RSI is mostly used on a 14-day timeframeand for look-back period according to Wilder and is considered oversold when below 30 and overbought when above 70. Most of the investors use 6, 5, or 14 as a look-back period, and oversold and overbought are (30, 70), (20, 80), where the sum of these two parameters is equal to 100. The frequently used parameters of traditional strategies are shown in table \ref{trad_RSI}.
+When using RSI, there are three parameters: look-back period, overbought, and oversold. First, select the period of days to calculate RSI. Second, choose the thresholds for oversold and overbought, which means that when RSI meets these thresholds, it will trigger the buy or sell signal. The representation of a RSI strategy is RSI ($period$) ($oversold,\ overbought$). Traditionally, RSI is mostly used on a 14-day timeframeand for look-back period according to Wilder and is considered oversold when below 30 and overbought when above 70. Most of the investors use 6, 5, or 14 as a look-back period, and oversold and overbought are (30, 70), (20, 80), where the sum of these two parameters is equal to 100. The frequently used parameters of traditional strategies are shown in table \ref{trad_RSI}.
 
-\bigbreak
-
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \captionsetup{font={footnotesize}}
     \caption{Tradition RSI strategies}
@@ -244,21 +289,17 @@ When using RSI, there are three parameters: look-back period, overbought, and ov
         \toprule
         \textbf{period} & \textbf{(oversold, overbought)} \\
         \midrule
-        RSI(5)          & (20, 80)                        \\
-        RSI(6)                                            \\
-        RSI(14)         & (30, 70)                        \\
+        5               & (20, 80)                        \\
+        6                                                 \\
+        14              & (30, 70)                        \\
         \bottomrule
     \end{tabularx}
 \end{table}
 
-\bigbreak
-
 % \textbf{Characteristics of RSI}
 The traditional strategies restrict the probability to find the perfect time to buy or sell stocks. However, this research extends the look-back periods from 1 to 256, oversold and overbought from 0 to 100, and the sum of oversold and overbought does not necessarily need to be equal to 100. For example, RSI(100)(47, 89) or RSI(9)(19, 55), etc. After removing the restriction of traditional strategies, the potential of RSI has been unlocked. There is a great chance to find a strategy which can better adaptive to the every changing stock markets. The comparison of RSI traditoinal strategy and new RSI strategy is chown in table \ref{trad_and_GN_RSI}.
 
-\bigbreak
-
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \captionsetup{font={footnotesize}}
     \caption{Comparison of RSI traditoinal strategy and new RSI strategy}
@@ -269,7 +310,7 @@ The traditional strategies restrict the probability to find the perfect time to 
         \toprule
         \textbf{}&\textbf{Traditoinal strategy}  & \textbf{new RSI strategy}  \\
         \midrule
-        strategy & RSI(5 or 6 or 14) and (20, 80) or (30, 70) & RSI(1 to 256)(0 to 127, 0 to 127)  \\
+        strategy & RSI (5 or 6 or 14) and (20, 80) or (30, 70) & RSI (1 to 256) (0 to 127, 0 to 127)  \\
         solution space & 6 & $\text{2}^\text{22}$  \\
         \bottomrule
     \end{tabular*}
