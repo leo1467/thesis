@@ -1,0 +1,33 @@
+\documentclass[../Proposed Method.tex]{subfiles}
+\begin{document}
+
+% How to evaluate the performance of our method
+The bechmark we use in this research is the internal rate of return. This is a metric used in financial analysis to estimate the profitability of the investment annually. The greater the IRR, the greater the return on an investment.
+
+\subsubsection{Training period IRR}
+
+There are three types of sliding windows, symmetric, asymmetric, and year-on-year. Considering the overlapping of time frame of asymmetric sliding window, the rate of return (RoR) of training period need to be break down to the smallest unit, which is the daily return rate (DRR), as in formula \ref{daily_RoR}. Then, calculate the average of all the DRR of time frames. At last, the IRR of training period can be computed by the average of all DRR to the power of how many days in a year. The formula for training period IRR is shown in formula \ref{train_IRR}.
+
+\begin{equation}
+    \label{daily_RoR}
+    \scalebox{1.5}
+    {$DRR = (RoR\ of\ a\ time\ frame)^{\frac{1}{how\ many\ days\ in\ this\ time\ frame}}$}
+\end{equation}
+
+\begin{equation}
+    \label{train_IRR}
+    \scalebox{1.5}
+    {$IRR_{training\ period}=(average\ DRR)^{how\ days\ in\ a\ year}$}
+\end{equation}
+
+\subsubsection{Testing period IRR}
+
+The IRR of testing period is simple, just calculate the product of each RoR of testing time frame to the power of how many years in the testing period. The formula of testing period IRR is shown in formula \ref{test_IRR} , where $n$ is the number of time frames in a sliding window.
+
+\begin{equation}
+    \label{test_IRR}
+    \scalebox{1.5}
+    {$IRR_{testing\ period}=(\displaystyle \prod_{i=1}^{n} RoR{i})^{\frac{1}{how\ many\ years\ in\ the\ testing\ period}}$}
+\end{equation}
+
+\end{document}
