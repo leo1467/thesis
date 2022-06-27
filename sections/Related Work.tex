@@ -1,6 +1,73 @@
 \documentclass[../main.tex]{subfiles}
 \begin{document}
 
-Related Work
+Research on stock markets has attracted many scholars' attention in different fields. There are three commom methods of analyzing the market, metaheuristic, artificial neural network, and fuzzy theory. Our research focus on using evolutionary computation to manage the problem.
+\bigbreak
+
+In a stock trading problem, fuzzy theory is used to categorize a huge amount of historical stock price data by a fuzzy classification. The aim is to predict future stock movements.
+\bigbreak
+
+This paper \textcolor{red}{[Embedding Four Medium-Term Technical Indicators to an Intelligent Stock Trading Fuzzy System for Predicting: A Portfolio Management Approach]} utilizes a small number of coherent trend-following technical indicators with similar characteristics, but constructed with a different philosophy, in order to predict the movement of a stock market.
+% Each one of them produces independent buy/sell signals which are used by a previously strict classic trading strategy that has been transformed appropriately to promote the subjectivity and fuzziness. 
+% These signals act as inputs to an appropriately designed fuzzy system, which makes a medium-term prediction regarding the optimum level (percent) of the investor's portfolio which should be invested. 
+% The performance of the model for the 1997-2012 period is excessively superior from the buy and hold (B\&H) strategy and the interest gained from saving bank accounts, even after the subtraction of the trading costs. 
+% The results are very convincing, even when the testing period is divided into a number of bull and bear market sub periods.
+\bigbreak
+
+\textcolor{red}{[A Hybrid Artificial Neural Network with Metaheuristic Algorithms for Predicting Stock Price]} aims to predict prices on stock exchange via the hybrid artificial neural network models and metaheuristic algorithms which consist of cuckoo search, improved cuckoo search, improved cuckoo search genetic algorithm, genetic algorithm, and particle swarm optimization. The results suggest that particle swarm optimization is a dominant metaheuristic approach to predict stock price according to statistical performances of the above approaches.
+\bigbreak
+
+\textcolor{red}{[NSE Stock Market Prediction Using Deep-Learning Models]} used four deep learning architectures for prediction of NSE and NYSE. From the result, deep learning models is capable of capturing the abrupt changes in the system.
+\bigbreak
+
+\textcolor{red}{[Technical analysis strategy optimization using a machine learning approach in stock market indices]} propose a hybrid approach to generate trading signals. The method consists of applying a technical indicator combined with a machine learning approach to produce a trading decision. The performances of Linear Model (LM), Artificial Neural Network (ANN), Random Forests (RF) and Support Vector Regression (SVR) was tested. Results achieved show that the addition of machine learning techniques to technical analysis strategies improves the trading signals.
+% As technical strategies for trading, the Triple Exponential Moving Average (TEMA) and Moving Average Convergence/Divergence (MACD) were considered. 
+% We tested the resulting technique on daily trading data from three major indices: Ibex35 (IBEX), DAX and Dow Jones Industrial (DJI). 
+\bigbreak
+
+In this research \textcolor{red}{[Technical Market Indicators Optimization using Evolutionary Algorithms]}, technical indicators are applied to interpret stock market trending and investing decision. In this work, Evolutionary Algorithms are proposed to discover correct indicator parameters in trading. In order to check this proposal the Moving Average ConvergenceDivergence (MACD) technical indicator has been selected. Preliminary results show that this technique could work well on stock index trending. Indexes are smoother and easier to predict than stock prices.
+\bigbreak
+
+% Instead of using fuzzy methods to predict stock prices, some researches utilize machine learning or deep learning to classify whether a stock price will rise or fall for the timing problem of the stock market. The neural network is a mathematical or computational model that mimics the structure and function of a biological neural network. It utilizes related information of the stocks as input and then outputs predicted stock prices or trading strategies after training data. In [8] research, financial news headlines and technical indicators are used as input, and different neural network models predict future stock prices. [9] employs the back propagation neural network to strengthen the innovative normalization method and effectively improves the accuracy of stock price forecasting. [10] applies deep neural network (DNN) to select technical indicators for investment decisions based on market conditions.
+
+Evolutionary computation is a group of algorithms inspired by biological evolution for global optimization. The process of evolutionary computation can be divided into several major steps such as reproduction, mutation, recombination, natural selection and survival of the fittest. It is a promising technology that have been used in science and engineering for solving practical problems and as computational models. The characteristic of evolutionary computation is when searching the solution within the solution space, the solution algorithm finds gets closer and closer to the best solution each iteration, because of the experience from the last iteration. There are few popular evolutionary algorithms such as GA, ACO and PSO.
+%  In the literature, many studies have analyzed stock timing issues, and the most common evolutionary algorithms are GA, PSO, and ant colony optimization (ACO). GA is the algorithm that learns from the biosphere and evolves superior data. [11] use a decision tree to make the decision of buying and selling in the U.S. stock market. Solving the best binary decision tree problem by genetic algorithm, [12] employs up to eight technical indicators including moving average and genetic algorithm to search for a trade strategy. Besides buying and selling, the research adds a new signal to exit the market when the loss exceeds a certain percentage of funds. PSO and ACO are swarm intelligence algorithms, and [13]-[15] employ relevant stock data or technical indicators and study appropriate trading rules through generational iterative algorithms.
+\bigbreak
+
+GNQTS is based on the Quantum-inspired Tabu Search algorithm (QTS) \textcolor{red}{[Classical and quantum-inspired Tabu search for solving 0/1 knapsack problem]}, which takes the advantages of the classical Tabu search and the characteristics of quantum superposition. QTS outperforms other heuristic algorithms whn it comes to optimization problems. It uses the best solution and the worst solution in each iteration as guidance to update the probability of choosing which item to put into the knapsack. As the result of the QTS, the particles approaches the best solution in the solution space in each iteration while moves away from the worst solution simultaneously. GNQTS \textcolor{red}{[A Novel Portfolio Optimization with Short Selling Using GNQTS and Trend Ratio]} keeps the advantages of QTS and adding the quantum Not-gate to enhance the ability in order to leave the local optimal. GNQTS has improved performance and stability when looking for potential solutions.
+% According to the probability in a Q-matrix, QTS selects the quantum bits in the solution. The probability value in a Q-matrix is updated by the rotation angle. Thus, GNQTS improves QTS by the global-best and quantum not-gate. The global-best helps to find the best solution, and the quantum not-gate helps the solution jump out of the local optimum to the global optimum. Therefore, this paper uses GNQTS to find the potential solutions in the U.S. stock market.
+
+% Quantum-inspired evolutionary algorithms (QIEAs), which are based on the physical concept of quantum superposition states, aim to increase the chance of jumping out of the local optimal value, approaching the best solution and moving away from the worst solution to achieve higher search efficiency. [16] propose a method of using QTS to look for the best combination of trading strategies through various technical indicators. QTS performs much better than other heuristic algorithms in optimization problems without premature convergence, and so it can effectively find the optimal or near-optimal rules. Researchers have utilized technical indicators to present good results, but they have not optimized the parameters of the indicators. In stock trading, choosing parameters of technical indicators is a complicated optimization problem. Therefore, this paper proposes a modification for QTS, called GQTS, replacing the best solution of each generation by a global optimum solution. In addition to using traditional sliding windows [17] to solve the problem of overfitting, we add the year-on-year sliding window to adapt to the economic cycle as well. Furthermore, we join a 2-phase system to make the trading strategy more accurate. By using GQTS with sliding windows and 2-phase system, our system can quickly and accurately search the best strategy in the U.S. stock market.
+\bigbreak
 
 \end{document}
+
+% A Technique for the Optimization of the Parameters of Technical Indicators with Multi-Objective Evolutionary Algorithms
+
+% Building Intelligent Moving Average-Based Stock Trading System Using Metaheuristic Algorithms
+
+% Combining Technical Analysis with Sentiment Analysis for Stock Price Prediction
+
+% Dynamic Stock Trading System based on Quantum-Inspired Tabu Search Algorithm
+
+% Forecasting stock price using integrated artificial neural network and metaheuristic algorithms compared to time series models
+
+% Forecasting the NYSE composite index with technical analysis, pattern recognizer, neural network, and genetic algorithm: a case study in romantic decision support
+
+% Genetic Algorithm-Optimized Long Short-Term Memory Network for Stock Market Prediction
+
+% Improved Quantum-Inspired Tabu Search Algorithm for Solving Function Optimization Problem
+
+% Intelligent Stock Trading System based on QTS Algorithm in Japan’s Stock Market
+
+% Next Generation Metaheuristic: Jaguar Algorithm
+
+% Portfolio Optimization Based on Funds Standardization and Genetic Algorithm
+
+
+
+
+% Using Trend Ratio and GNQTS to Assess Portfolio Performance in the U.S. Stock Market: related work的QTS部分
+
+
+% Technical market indicators optimization using evolutionary algorithms: 摘要部分可以用
